@@ -1,0 +1,16 @@
+body {
+    background: linear-gradient(45deg,
+            rgb(255, 170, 0),
+            rgb(252, 114, 21),
+            rgb(249, 82, 10));
+    justify-content: center;
+    /* Centraliza horizontal */
+    align-items: center;
+    /* Centraliza vertical */
+    height: 100vh;
+
+}
+
+.image{
+    height: 100px;
+}
