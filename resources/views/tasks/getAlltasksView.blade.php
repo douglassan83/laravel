@@ -2,6 +2,10 @@
 @section('content')
     <h2> todas as tarefas</h2>
 
+    <a href="{{ route('tasks.add') }}" class="btn btn-success"> Adicionar Tarefa</a>
+<br>
+<br>
+
     <table class="table">
         <thead>
             <tr>

@@ -29,7 +29,7 @@
                      <td>{{ $prenda->valor_previsto }}</td>
                      <td>{{ $prenda->username}}</td>
                      <td>{{ $prenda->valor_gasto }}</td>
-                     <td>{{ $prenda->valor_previsto - $prenda->valor_gasto }}</td>
+                    <td>{{ $prenda->valor_previsto - $prenda->valor_gasto }}</td>
 
 
                       <td><a href="{{ route('prendas.view', $prenda->id) }}" class="btn btn-info">Ver</a></td>

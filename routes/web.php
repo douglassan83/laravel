@@ -46,6 +46,10 @@ Route::get('/deleteuser/{id}', [UserController::class, 'deleteUser'])->name('use
 
 
 
+Route::get('/addTask', [TaskController::class, 'addTask'])->name('tasks.add');
+
+Route::post('/addTask', [TaskController::class, 'store'])->name('tasks.store');
+
 Route::get('/getAllTasks', [TaskController::class, 'getAllTasks'])->name('tasks.all');
 
 //rota que abre a view com a info da task

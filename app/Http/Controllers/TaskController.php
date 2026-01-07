@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 
+
 class TaskController extends Controller
 {
     public function getAllTasks()
@@ -51,6 +52,30 @@ class TaskController extends Controller
 
         return back();
     }
+
+    public function addTask()
+{
+    $users = DB::table('users')->get();  // array de usuarios para selecionar na lista dropdown do formulario
+    return view('tasks.add_task', compact('users'));
+}
+
+public function store(Request $request)
+{
+    $request->validate([
+        'nome' => 'required|string|max:50',
+        'descricao' => 'required',
+        'user_id' => 'required'
+    ]);
+
+    DB::table('tasks')->insert([
+        'name' => $request->nome,           // ← name (DB)
+        'description' => $request->descricao, // ← description (DB)
+        'user_id' => $request->user_id
+    ]);
+
+    return redirect()->route('tasks.all')
+        ->with('success', 'Tarefa criada!');
+}
 
 
 
