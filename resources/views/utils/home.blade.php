@@ -1,6 +1,9 @@
 @extends('layouts.main_layout')
 @section('content')
     @if ($surname)
+        
+
+
         <h5>Olá {{ $surname }}</h5>
         <img src="{{ asset('images/doug-modelo-removebg-preview.png') }}" alt="" class="image">
     @else

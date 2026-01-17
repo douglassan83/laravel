@@ -2,16 +2,39 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Storage;
 
 class UserController extends Controller
 {
-    public function addUser()
-    {
-        $pageAdmin = 'António';
+    public function addUser(){
+         $pageAdmin = 'António';
+
         return view('users.add_user', compact('pageAdmin'));
     }
+//função que recebe os dados do formulário, valida e insere na base de dados
+    public function storeUser(Request $request){
+        //dd($request->all());
+
+        $request->validate([
+            'name' => 'required|string|max:50',
+            'email' => 'required|email|unique:users',
+            'password' =>'required|min:8|string'
+        ]);
+
+        User::insert([
+            'name' => $request->name,
+            'email' => $request->email,
+            'password' => Hash::make($request->password)
+        ]);
+
+        return redirect()->route('users.all')->with('message', 'User inserido com sucesso');
+
+    }
+
 
     public function allUsers()
     {
@@ -138,4 +161,32 @@ class UserController extends Controller
 
 
 
+
+
+
+     public function updateUser(Request $request){
+         $request->validate([
+            'name' => 'required|string|max:50',
+            'photo'=> 'image'
+        ]);
+
+
+        $photo = null;
+
+        if($request->hasFile('photo')){
+            $photo = Storage::putFile('userPhotos', $request->photo);
+        }
+
+        DB::table('users')
+        ->where('id', $request->id)
+        ->update([
+            'name' =>$request->name,
+            'address' =>$request->address,
+            'nif' =>$request->nif,
+            'photo'=> $photo
+        ]);
+
+        return redirect()->route('users.all')->with('message', 'User actualizado com sucesso');
+
+    }
 }

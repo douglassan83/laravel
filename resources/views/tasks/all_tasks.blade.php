@@ -2,7 +2,16 @@
 @section('content')
     <h2> todas as tarefas</h2>
 
+{{-- botão add tarefa --}}
     <a href="{{ route('tasks.add') }}" class="btn btn-success"> Adicionar Tarefa</a>
+
+    {{-- mensagem tarefa adicionada com sucesso --}}
+      @if (session('message'))
+        <div class="">
+            {{ session('message') }}
+        </div>
+    @endif
+
 <br>
 <br>
 
@@ -31,7 +40,7 @@
                     <td>{{ $task->status }}</td>
                     <td>{{ $task->due_at }}</td>
                     {{-- na coluna abaixo username é uma var da
-                    função getAlltasks que recebe o nome do user
+                    função all_tasks que recebe o nome do user
                     no lugar onde estava user_id original da tabela --}}
                     <td>{{ $task->username }}</td>
                     <td><a href="{{ route('tasks.view', $task->id) }}" class="btn btn-info">Ver</a></td>
